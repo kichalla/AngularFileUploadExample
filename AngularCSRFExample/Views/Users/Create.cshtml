@@ -1,0 +1,83 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div ng-app="myApp">
+    <div ng-controller="tokenCtrl">
+        <div>
+            <div>
+                <label>Create JWT token by faking authentication.</label>
+                <div>
+                    <button ng-click="createToken()">Create JWT Token</button>
+                </div>
+            </div>
+            <br />
+            <div ng-show="showStatus">
+                <b><span ng-bind="statusMessage"></span></b>
+            </div>
+            <div ng-show="showResponseData">
+                <b>Token:</b> <span ng-bind="responseData.token"></span><br />
+                <b>Expiration:</b> <span ng-bind="responseData.expiration"></span><br />
+                <b>Claims:</b> <span ng-bind="responseData.claims"></span><br />
+            </div>
+        </div>
+    </div>
+    <br />
+    <div ng-controller="tokenCtrl">
+        <div>
+            <div>
+                <label>Create CSRF token by sending in the JWT bearer token in Authorization header.</label>
+                <div>
+                    <button ng-click="createCSRFToken()">Create CSRF Token</button>
+                </div>
+            </div>
+            <br />
+            <div ng-show="showStatus">
+                <b><span ng-bind="statusMessage"></span></b>
+            </div>
+            <div ng-show="showResponseData">
+                <b>CSRF Token:</b> <span ng-bind="responseData"></span><br />
+            </div>
+        </div>
+    </div>
+    <br />
+    <div ng-controller="myCtrl">
+        <label>Post the data using the latest CSRF token having the user claims</label>
+        <div>
+            <div>
+                <label for="Name">Name</label>
+                <div>
+                    <input type="text" name="Name" ng-model="name" />
+                </div>
+            </div>
+            <br />
+            <div>
+                <label for="Age">Age</label>
+                <div>
+                    <input type="text" name="Age" ng-model="age" />
+                </div>
+            </div>
+            <br />
+            <div>
+                <label for="Zipcode">Zipcode</label>
+                <div>
+                    <input type="text" name="Zipcode" ng-model="zipcode" />
+                </div>
+            </div>
+            <br />
+            <div>
+                <button ng-click="createUser1()">Create User</button>
+            </div>
+            <br />
+            <div ng-show="showStatus">
+                <b><span ng-bind="statusMessage"></span></b>
+            </div>
+            <div ng-show="showResponseData">
+                <b>Name:</b> <span ng-bind="responseData.name"></span><br />
+                <b>Age:</b><span ng-bind="responseData.age"></span><br />
+                <b>Zipcode:</b> <span ng-bind="responseData.zipcode"></span><br />
+            </div>
+        </div>
+    </div>
+</div>
