@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,18 @@ namespace AngularCSRFExample
         {
             services.Configure<AntiforgeryOptions>(options => options.HeaderName = "X-XSRF-TOKEN");
 
-            services.AddAuthentication();
+            services.AddAuthentication(o =>
+            {
+                o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(o =>
+            {
+                o.Events.OnRedirectToLogin = (redirectContext) =>
+                {
+                    redirectContext.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+            });
 
             services.AddMvc();
         }
