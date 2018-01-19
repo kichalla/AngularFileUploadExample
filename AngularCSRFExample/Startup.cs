@@ -26,22 +26,7 @@ namespace AngularCSRFExample
         {
             services.Configure<AntiforgeryOptions>(options => options.HeaderName = "X-XSRF-TOKEN");
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityToken:Key"])),
-                    ValidateLifetime = true,
-                    ValidIssuer = Configuration["JwtSecurityToken:Issuer"],
-                    ValidAudience = Configuration["JwtSecurityToken:Audience"]
-                };
-            });
+            services.AddAuthentication();
 
             services.AddMvc();
         }
@@ -50,7 +35,6 @@ namespace AngularCSRFExample
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -59,6 +43,8 @@ namespace AngularCSRFExample
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

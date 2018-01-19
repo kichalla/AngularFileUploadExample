@@ -1,32 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
 using AngularCSRFExample.Models;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AngularCSRFExample.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index([FromServices] IAntiforgery antiforgery)
         {
+            // We can send the request token as a JavaScript-readable cookie, and Angular will use it by default.
+            var tokens = antiforgery.GetAndStoreTokens(HttpContext);
+            HttpContext.Response.Cookies.Append(
+                "XSRF-TOKEN",
+                tokens.RequestToken,
+                new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.Lax });
+
             return View();
         }
 
-        public IActionResult About()
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([FromBody] User user)
         {
-            ViewData["Message"] = "Your application description page.";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            return Ok(user);
         }
 
         public IActionResult Error()

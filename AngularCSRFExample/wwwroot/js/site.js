@@ -42,17 +42,7 @@ myApp.service('userService', ['$http', 'tokenService', function ($http, tokenSer
     }
 
     this.createUser1 = function (user) {
-        if (tokenService.Token == undefined) {
-            return $http.post('/users/create', user);
-        }
-        else {
-            return $http.post(
-                '/users/create',
-                user,
-                {
-                    headers: { 'Authorization': ' Bearer ' + tokenService.Token.token }
-                });
-        }
+        return $http.post('/home/create', user);
     };
 }]);
 
