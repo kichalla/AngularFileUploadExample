@@ -20,16 +20,4 @@ angular.module('Authentication')
                     }
                 });
             };
-
-            $scope.logout = function () {
-                AuthenticationService.Logout(function (response) {
-                    if (response.status == 200) {
-                        AuthenticationService.ClearCredentials();
-                        $location.path('/login');
-                    } else {
-                        $scope.error = response.message;
-                        $scope.dataLoading = false;
-                    }
-                });
-            }
         }]);

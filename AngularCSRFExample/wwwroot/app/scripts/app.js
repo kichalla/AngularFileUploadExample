@@ -21,7 +21,7 @@ angular.module('myApp', [
             })
 
             .when('/', {
-                controller: 'LoginController',
+                controller: 'HomeController',
                 templateUrl: 'app/modules/home/views/home.html'
             })
 

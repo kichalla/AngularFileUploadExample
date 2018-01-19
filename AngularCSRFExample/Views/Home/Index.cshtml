@@ -1,65 +1,15 @@
-﻿@model User
+﻿
 @{
-    ViewData["Title"] = "Create User";
+    ViewData["Title"] = "Index";
 }
 
+<h2>Index1</h2>
+
 <div ng-app="myApp">
-    <div ng-controller="authCtrl">
-        <div>
-            <div>
-                <label>Login with username and password (fake).</label>
-                <div>
-                    <button ng-click="login()()">Login</button>
-                </div>
-            </div>
-            <div>
-                <label>Logout</label>
-                <div>
-                    <button ng-click="logout()()">Logout</button>
-                </div>
-            </div>
-            <br />
-            <div ng-show="showStatus">
-                <b><span ng-bind="statusMessage"></span></b>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div ng-controller="myCtrl">
-        <label>Post the data using the latest CSRF token having the user claims</label>
-        <div>
-            <div>
-                <label for="Name">Name</label>
-                <div>
-                    <input type="text" name="Name" ng-model="name" />
-                </div>
-            </div>
-            <br />
-            <div>
-                <label for="Age">Age</label>
-                <div>
-                    <input type="text" name="Age" ng-model="age" />
-                </div>
-            </div>
-            <br />
-            <div>
-                <label for="Zipcode">Zipcode</label>
-                <div>
-                    <input type="text" name="Zipcode" ng-model="zipcode" />
-                </div>
-            </div>
-            <br />
-            <div>
-                <button ng-click="createUser()">Create User</button>
-            </div>
-            <br />
-            <div ng-show="showStatus">
-                <b><span ng-bind="statusMessage"></span></b>
-            </div>
-            <div ng-show="showResponseData">
-                <b>Name:</b> <span ng-bind="responseData.name"></span><br />
-                <b>Age:</b><span ng-bind="responseData.age"></span><br />
-                <b>Zipcode:</b> <span ng-bind="responseData.zipcode"></span><br />
+    <div class="jumbotron">
+        <div class="container">
+            <div class="col-xs-offset-2 col-xs-8">
+                <div ng-view></div>
             </div>
         </div>
     </div>

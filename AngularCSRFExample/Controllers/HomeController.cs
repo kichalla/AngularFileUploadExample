@@ -19,19 +19,7 @@ namespace AngularCSRFExample.Controllers
                 tokens.RequestToken,
                 new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.Lax });
 
-            return View("Index1");
-        }
-
-        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create([FromBody] User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            return Ok(user);
+            return View();
         }
 
         public IActionResult Error()
