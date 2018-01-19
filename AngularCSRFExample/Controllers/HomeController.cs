@@ -19,7 +19,7 @@ namespace AngularCSRFExample.Controllers
                 tokens.RequestToken,
                 new CookieOptions() { HttpOnly = false, SameSite = SameSiteMode.Lax });
 
-            return View();
+            return View("Index1");
         }
 
         [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
