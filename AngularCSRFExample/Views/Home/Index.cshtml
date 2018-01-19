@@ -12,13 +12,19 @@
                     <button ng-click="login()()">Login</button>
                 </div>
             </div>
+            <div>
+                <label>Logout</label>
+                <div>
+                    <button ng-click="logout()()">Logout</button>
+                </div>
+            </div>
             <br />
             <div ng-show="showStatus">
                 <b><span ng-bind="statusMessage"></span></b>
             </div>
         </div>
     </div>
-    
+    <br />
     <div ng-controller="myCtrl">
         <label>Post the data using the latest CSRF token having the user claims</label>
         <div>
