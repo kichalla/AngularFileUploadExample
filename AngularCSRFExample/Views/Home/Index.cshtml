@@ -4,44 +4,21 @@
 }
 
 <div ng-app="myApp">
-    <div ng-controller="tokenCtrl">
+    <div ng-controller="authCtrl">
         <div>
             <div>
-                <label>Create JWT token by faking authentication.</label>
+                <label>Login with username and password (fake).</label>
                 <div>
-                    <button ng-click="createToken()">Create JWT Token</button>
+                    <button ng-click="login()()">Login</button>
                 </div>
             </div>
             <br />
             <div ng-show="showStatus">
                 <b><span ng-bind="statusMessage"></span></b>
             </div>
-            <div ng-show="showResponseData">
-                <b>Token:</b> <span ng-bind="responseData.token"></span><br />
-                <b>Expiration:</b> <span ng-bind="responseData.expiration"></span><br />
-                <b>Claims:</b> <span ng-bind="responseData.claims"></span><br />
-            </div>
         </div>
     </div>
-    <br />
-    <div ng-controller="tokenCtrl">
-        <div>
-            <div>
-                <label>Create CSRF token by sending in the JWT bearer token in Authorization header.</label>
-                <div>
-                    <button ng-click="createCSRFToken()">Create CSRF Token</button>
-                </div>
-            </div>
-            <br />
-            <div ng-show="showStatus">
-                <b><span ng-bind="statusMessage"></span></b>
-            </div>
-            <div ng-show="showResponseData">
-                <b>CSRF Token:</b> <span ng-bind="responseData"></span><br />
-            </div>
-        </div>
-    </div>
-    <br />
+    
     <div ng-controller="myCtrl">
         <label>Post the data using the latest CSRF token having the user claims</label>
         <div>
@@ -67,7 +44,7 @@
             </div>
             <br />
             <div>
-                <button ng-click="createUser1()">Create User</button>
+                <button ng-click="createUser()">Create User</button>
             </div>
             <br />
             <div ng-show="showStatus">
