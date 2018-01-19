@@ -53,8 +53,7 @@ namespace AngularCSRFExample.Controllers
             HttpContext.Response.Cookies.Delete(antiforgeryCookieName);
             HttpContext.Response.Cookies.Delete("XSRF-TOKEN");
 
-            //Redirect to home page so that a new antiforgery pair is generated
-            return Redirect("/");
+            return Ok();
         }
     }
 }
